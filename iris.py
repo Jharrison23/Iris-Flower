@@ -55,3 +55,15 @@ train_data = np.delete(iris.data, test_idx, axis = 0)
 # These variables represent the testing set
 test_target = iris.target[test_idx]
 test_data = iris.data[test_idx]
+
+# Create decision tree classifier
+clf = tree.DecisionTreeClassifier()
+
+# Use training data to train the classifier
+clf.fit(train_data, train_target)
+
+# print the targets for the testing data, for comparision with the prediction
+print test_target
+
+# Pass in the features of the testing data as to see what the decision tree predicts
+print clf.predict(test_data)
