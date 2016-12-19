@@ -67,3 +67,19 @@ print test_target
 
 # Pass in the features of the testing data as to see what the decision tree predicts
 print clf.predict(test_data)
+
+
+# Inorder to visualize the decision tree we can use this code from scikits Documentation
+# must have pydotplus and pyparsing installed in order for this code to execute
+# this will store the decision tree in a pdf named Iris.pdf 
+from sklearn.externals.six import StringIO
+import pydotplus
+dot_data = StringIO()
+
+tree.export_graphviz(clf, out_file=dot_data,
+                         feature_names=iris.feature_names,
+                         class_names=iris.target_names,
+                         filled=True, rounded=True,
+                         impurity=False)
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
+graph.write_pdf("Iris.pdf")
