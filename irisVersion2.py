@@ -20,13 +20,21 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = .5)
 # import the decision tree classifier
 from sklearn import tree
 
+from sklearn import svm
+
+supportVector = svm.SVC()
+
 # create the classifier
 decisionTree = tree.DecisionTreeClassifier()
+
+supportVector.fit(x_train, y_train)
 
 # train the decisionTree
 decisionTree.fit(x_train, y_train)
 # predict the results of the classifier
-predictions = decisionTree.predict(x_test)
+Dpredictions = decisionTree.predict(x_test)
+
+Spredictions = supportVector.predict(x_test)
 
 # print all of the labels which were predicted
 ### print predictions
@@ -35,4 +43,6 @@ predictions = decisionTree.predict(x_test)
 from sklearn.metrics import accuracy_score
 
 # print the accuracy score for the decision tree
-print "The Decision tree classifier was %f%% accurate." % (accuracy_score(y_test, predictions) * 100)
+print "The Decision tree classifier was %f%% accurate." % (accuracy_score(y_test, Dpredictions) * 100)
+
+print "The Support Vectorm Machine Classifier was %f%% accurate." % (accuracy_score(y_test, Spredictions) * 100)
