@@ -29,4 +29,10 @@ decisionTree.fit(x_train, y_train)
 predictions = decisionTree.predict(x_test)
 
 # print all of the labels which were predicted
-print predictions
+### print predictions
+
+# Check the accuruacy of the classifier on the testing data
+from sklearn.metrics import accuracy_score
+
+# print the accuracy score for the decision tree
+print "The Decision tree classifier was %f%% accurate." % (accuracy_score(y_test, predictions) * 100)
