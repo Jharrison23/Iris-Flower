@@ -20,17 +20,14 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = .5)
 # import the decision tree classifier
 from sklearn import tree
 
-# importh the support vector machine classifier
+# import the support vector machine classifier
 from sklearn import svm
 
+# import the k nearest neighbors classifier
 from sklearn.neighbors import KNeighborsClassifier
 
+# create the k nearest neighbors classifier
 nearestNeighbors = KNeighborsClassifier()
-
-nearestNeighbors.fit(x_train, y_train)
-
-Npredictions = nearestNeighbors.predict(x_test)
-
 
 # create the support vector machine classifier
 supportVector = svm.SVC()
@@ -38,11 +35,18 @@ supportVector = svm.SVC()
 # create the classifier
 decisionTree = tree.DecisionTreeClassifier()
 
+
+# train the classifier
+nearestNeighbors.fit(x_train, y_train)
+
 # train the support vector machine
 supportVector.fit(x_train, y_train)
 
 # train the decisionTree
 decisionTree.fit(x_train, y_train)
+
+# store the predictions of the classifier
+Npredictions = nearestNeighbors.predict(x_test)
 
 # predict the results of the classifier
 Dpredictions = decisionTree.predict(x_test)
@@ -62,4 +66,5 @@ print "The Decision tree classifier was %f%% accurate." % (accuracy_score(y_test
 # Print the accuracy of the support vector machine
 print "The Support Vectorm Machine Classifier was %f%% accurate." % (accuracy_score(y_test, Spredictions) * 100)
 
+# print the accuracy of the k nearest neighbors algorithm
 print "The K Nearest Neighbors Classifier was %f%% accurate." % (accuracy_score(y_test, Npredictions) * 100)
