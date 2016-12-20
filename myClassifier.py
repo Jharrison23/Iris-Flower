@@ -1,8 +1,10 @@
 
+# import used for euclidean Distance formula
 from scipy.spatial import distance
 
 
-
+# K nearest neighbors uses euclidean distance formula to find the nereast neighbor
+# this function will find the distance between points a and b
 def euclideanDistance(a, b):
     return distance.euclidean(a, b)
 
@@ -13,33 +15,49 @@ class BareBonesKNN():
 
     # Method to train the algorithm, takes the training features and labels as input
     def fit(self, x_train, y_train):
-        # store the training elements for now
+        # Memorize the training data
         self.x_train = x_train
         self.y_train = y_train
 
 
-    # Method to test our algorithm
+    # Method implemented to make a prediction given a test point
     def predict(self, x_test):
+
         # since x_test is a 2d array we need to store the predictions in a 1 d array
         predictions = []
 
-        # for now just randomly choose a label from the testing data
+        # Go through the entire testing set and find the closest training points
+        # to a test point, and then add that label to the predictions array
         for row in x_test:
             label = self.closest(row)
             predictions.append(label)
         return predictions
 
-
+    # Function which will find the closest training point to the test point
+    # this method will loop over all the training point and keep track of the closest one
     def closest(self, row):
+
+        # variable which keeps track of shortest distance
+        # calculate the distance from the test point to the first training point
         shortestDistance = euclideanDistance(row, self.x_train[0])
+
+        # variable which keeps track of the index to the shortest distance
         shortestIndex = 0
 
+        # loop through the entire training set
         for i in range(1, len(self.x_train)):
+
+            # Find the distance from the test point to all other training points
             distance = euclideanDistance(row, self.x_train[i])
+
+            # if the new distance is smaller than our current shortest distance update shortest distance
             if distance < shortestDistance:
                 shortestDistance = distance
+
+                # since we have a new shortest distance match the index to the new current shortest index
                 shortestIndex = i
 
+        # return the label of the closest training example
         return self.y_train[shortestIndex]
 
 
@@ -73,5 +91,5 @@ Npredictions = KNNClassifier.predict(x_test)
 # Check the accuruacy of the classifier on the testing data
 from sklearn.metrics import accuracy_score
 
-# print the accuracy of the k nearest neighbors algorithm
-print "The K Nearest Neighbors Classifier was %f%% accurate." % (accuracy_score(y_test, Npredictions) * 100)
+# print the accuracy of the BareBonesKNN algorithm
+print "The simple BareBonesKNN Classifier was %f%% accurate." % (accuracy_score(y_test, Npredictions) * 100)
