@@ -1,8 +1,14 @@
 
-import random
+from scipy.spatial import distance
+
+
+
+def euclideanDistance(a, b):
+    return distance.euclidean(a, b)
 
 # implement class for new classifier
 # this will support two functions, fit to train the classfier and predict to test it
+# in K nearest neighbors the k represents the number of neighbors you consider
 class BareBonesKNN():
 
     # Method to train the algorithm, takes the training features and labels as input
@@ -19,9 +25,22 @@ class BareBonesKNN():
 
         # for now just randomly choose a label from the testing data
         for row in x_test:
-            label = random.choice(self.y_train)
+            label = self.closest(row)
             predictions.append(label)
         return predictions
+
+
+    def closest(self, row):
+        shortestDistance = euclideanDistance(row, self.x_train[0])
+        shortestIndex = 0
+
+        for i in range(1, len(self.x_train)):
+            distance = euclideanDistance(row, self.x_train[i])
+            if distance < shortestDistance:
+                shortestDistance = distance
+                shortestIndex = i
+
+        return self.y_train[shortestIndex]
 
 
 # import iris dataset from sklearn
