@@ -23,6 +23,15 @@ from sklearn import tree
 # importh the support vector machine classifier
 from sklearn import svm
 
+from sklearn.neighbors import KNeighborsClassifier
+
+nearestNeighbors = KNeighborsClassifier()
+
+nearestNeighbors.fit(x_train, y_train)
+
+Npredictions = nearestNeighbors.predict(x_test)
+
+
 # create the support vector machine classifier
 supportVector = svm.SVC()
 
@@ -52,3 +61,5 @@ print "The Decision tree classifier was %f%% accurate." % (accuracy_score(y_test
 
 # Print the accuracy of the support vector machine
 print "The Support Vectorm Machine Classifier was %f%% accurate." % (accuracy_score(y_test, Spredictions) * 100)
+
+print "The K Nearest Neighbors Classifier was %f%% accurate." % (accuracy_score(y_test, Npredictions) * 100)
