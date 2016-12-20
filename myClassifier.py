@@ -1,3 +1,12 @@
+# Machine Learning Classification algorithm to identify the type of flower
+# based off of the features Sepal Length and Width, and Petal Length and Width
+# Written by James Harrison following along with a google researcher tutorial
+
+# Data set obtained from the URL https://en.wikipedia.org/wiki/Iris_flower_data_set
+
+# this file implements a K nearest neighbor classification algorithm written from scratch
+# without the use of scikit learns k nearest neighbor
+
 
 # import used for euclidean Distance formula
 from scipy.spatial import distance
